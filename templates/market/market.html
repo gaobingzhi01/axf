@@ -11,7 +11,44 @@
 {% endblock script %}
 
 {% block main %}
-    <h1>market</h1>
-    <h1>market</h1>
-    <h1>market</h1>
+    <div id="marketDiv">
+        <div class="col-xs-3" id="leftDiv">
+            <ul>
+                 {% for category in categories %}
+                    <li>
+                        <span id="yellow{{ category.id }}"></span>
+                        <a href="#">{{ category.name }}</a>
+                    </li>
+                 {% endfor %}
+            </ul>
+        </div>
+        <div class="col-xs-9" id="rightDiv">
+            <div class="container-fluid" id="topDiv">
+                <div class="col-xs-6"><span>全部分类<span class="glyphicon glyphicon-menu-down"></span></span></div>
+                <div class="col-xs-6"><span>综合排序<span class="glyphicon glyphicon-menu-down"></span></span></div>
+            </div>
+            <div id="bottomDiv">
+                {% for product in products %}
+                    <li>
+                        <a href="#">
+                            <div id="liLeftDiv">
+                                <img src="{{ product.img }}">
+                            </div>
+                            <div id="liRightDiv">
+                                <h5>{{ product.name }}</h5>
+                                <p>{{ product.specifics }}</p>
+                                <p>
+                                    <span>{{ product.price }}</span>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    {% if product.price < product.marketPrice %}
+                                        <s>{{ product.marketPrice }}</s>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock main %}

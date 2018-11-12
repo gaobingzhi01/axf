@@ -25,7 +25,7 @@ SECRET_KEY = 'djv+yh*_s-_s58_^^&yauoo3*nvf)zs$jnc&jr1kvk6m=9pv^w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'axfApp',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'axf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'axf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'axf',
+        'USER':'root',
+        'PASSWORD':'123',
+        'HOST':'47.93.232.225',
+        'PORT':3306
     }
 }
 
@@ -103,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -118,3 +123,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'statics')
+]
+
+# 缓存
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '47.93.232.225:6379',
+        'TIMEOUT': 60,
+        'OPTIONS': {
+            'PASSWORD': '123',
+            # 'CLIENT_CLASS': 'redis_cache.client.DefaultClient'
+        }
+    }
+}
+
+# celery
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = "redis://:123@47.93.232.225:6379/0"
+CELERY_IMPORTS = "axfApp.task"
+
+# 上传
+MEDIA_ROOT = os.path.join(BASE_DIR, "statics/media")

@@ -19,15 +19,45 @@
     {% block script %}{% endblock script %}
 </head>
 <body>
-    <header>sunck is a good man</header>
+    <header>gaobz is a good man</header>
     <div>
         {% block main %}{% endblock main %}
     </div>
-    <footer>
-        <a href="/home/">主页</a>
-        <a href="/market/">闪送超市</a>
-        <a href="/cart/">购物车</a>
-        <a href="/mine/">我的</a>
+    <footer class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="/home/">
+                    <dl>
+                        <dt><span id="home"></span></dt>
+                        <dd>首页</dd>
+                    </dl>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="/market/">
+                    <dl>
+                        <dt><span id="market"></span></dt>
+                        <dd>闪送超市</dd>
+                    </dl>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="/cart/">
+                    <dl>
+                        <dt><span id="cart"></span></dt>
+                        <dd>购物车</dd>
+                    </dl>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="/mine/">
+                    <dl>
+                        <dt><span id="mine"></span></dt>
+                        <dd>我的</dd>
+                    </dl>
+                </a>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

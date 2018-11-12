@@ -1,9 +1,9 @@
 from django.conf.urls import url
 
-from axf import views
+from axfApp import views
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^index$', views.index),
 
     url(r'^home/$', views.home),
     url(r'^market/$', views.market),
